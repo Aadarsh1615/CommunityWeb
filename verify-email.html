@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email - AdminHub</title>
+    <link rel="stylesheet" href="login.css">
+    <style>
+        .verification-container {
+            text-align: center;
+            padding: 40px 20px;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .verification-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 30px;
+            background: #e3f2fd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .verification-icon svg {
+            width: 40px;
+            height: 40px;
+            fill: #2563eb;
+        }
+        .verification-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 15px;
+        }
+        .verification-message {
+            color: #6b7280;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+        .email-highlight {
+            background: #f3f4f6;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #2563eb;
+            margin: 20px 0;
+        }
+        .back-to-login {
+            margin-top: 30px;
+        }
+        .back-to-login a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-to-login a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="logo">
+                <svg width="80" height="80" viewBox="0 0 64 64" fill="none">
+                    <rect x="20" y="10" width="24" height="32" rx="12" fill="#fff" opacity="0.1"/>
+                    <rect x="28" y="18" width="8" height="20" rx="4" fill="#fff"/>
+                    <rect x="24" y="38" width="16" height="4" rx="2" fill="#fff"/>
+                    <polygon points="32,54 22,44 42,44" fill="#fff" opacity="0.2"/>
+                </svg>
+            </div>
+            <h1>AdminHub</h1>
+            <p>Professional Network</p>
+        </div>
+        <div class="right-panel">
+            <div class="verification-container">
+                <div class="verification-icon">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
+                </div>
+                <h2 class="verification-title">Check Your Email</h2>
+                <p class="verification-message">
+                    We've sent a verification link to your email address. 
+                    Please click the link to verify your account and complete the registration process.
+                </p>
+                <div class="email-highlight" id="email-display">
+                    <!-- Email will be populated by JavaScript -->
+                </div>
+                <p class="verification-message">
+                    If you don't see the email, check your spam folder. 
+                    The verification link will expire in 24 hours.
+                </p>
+                <div class="back-to-login">
+                    <a href="login.html">← Back to Login</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Get email from URL parameter and display it
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('email');
+        if (email) {
+            document.getElementById('email-display').textContent = email;
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OTP Verification - AdminHub</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
+    <style>
+        body {
+            background: #f4f6fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .otp-container {
+            max-width: 420px;
+            margin: 80px auto;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 4px 24px #0001;
+            padding: 40px 32px 32px 32px;
+            text-align: center;
+        }
+        .otp-container h2 {
+            font-size: 2.1rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #2563eb;
+        }
+        .otp-container p {
+            color: #444;
+            font-size: 1.13rem;
+            margin-bottom: 28px;
+        }
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .otp-inputs input {
+            width: 48px;
+            height: 48px;
+            font-size: 2rem;
+            text-align: center;
+            border: 1.5px solid #e0e0e0;
+            border-radius: 8px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        .otp-inputs input:focus {
+            border-color: #2563eb;
+        }
+        .verify-btn, .resend-btn {
+            background: linear-gradient(90deg, #2563eb 0%, #1e4db7 100%);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 14px 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+        .verify-btn:hover, .resend-btn:hover {
+            background: linear-gradient(90deg, #1e4db7 0%, #2563eb 100%);
+        }
+        .info, .success, .error {
+            font-size: 0.98rem;
+            margin-top: 18px;
+        }
+        .info { color: #2563eb; }
+        .success { color: #388e3c; }
+        .error { color: #d32f2f; }
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <h2>OTP Verification</h2>
+        <p>Enter the 6-digit code sent to your email address.</p>
+        <form id="otpForm" autocomplete="off">
+            <div class="otp-inputs">
+                <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+                <input type="text" maxlength="1" inputmode="numeric" pattern="[0-9]*" required>
+            </div>
+            <button type="submit" class="verify-btn">Verify OTP</button>
+        </form>
+        <button class="resend-btn" id="resendBtn">Resend OTP</button>
+        <div class="info" id="infoMsg">Didn't receive the code? Check your spam folder or click the button above to resend.</div>
+        <div class="success" id="successMsg" style="display:none;"></div>
+        <div class="error" id="errorMsg" style="display:none;"></div>
+    </div>
+    <script src="otp-verification.js"></script>
+</body>
+</html>

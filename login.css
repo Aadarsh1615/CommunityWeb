@@ -1,0 +1,138 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f8f9fa;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+}
+
+.left-panel {
+    flex: 1;
+    background: linear-gradient(135deg, #1e4db7 0%, #2563eb 100%);
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.left-panel .logo {
+    margin-bottom: 30px;
+}
+
+.left-panel h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 0 0 10px 0;
+}
+
+.left-panel p {
+    font-size: 1.2rem;
+    opacity: 0.85;
+}
+
+.right-panel {
+    flex: 1;
+    background: radial-gradient(circle at 30% 30%, #fff 70%, #f3f6fa 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-form {
+    width: 100%;
+    max-width: 370px;
+    background: transparent;
+    padding: 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.login-form h2 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #222;
+}
+
+.styled-input {
+    padding: 14px 16px;
+    font-size: 1rem;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 7px;
+    outline: none;
+    margin-bottom: 12px;
+    background: #fff;
+    transition: border 0.2s;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.styled-input:focus {
+    border-color: #2563eb;
+}
+
+.options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.98rem;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.options label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+}
+
+.options .forgot {
+    color: #b59c7d;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.options .forgot:hover {
+    color: #a67c52;
+}
+
+.login-form button {
+    background: linear-gradient(90deg, #2563eb 0%, #1e4db7 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 14px 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+.login-form button:hover {
+    background: linear-gradient(90deg, #1e4db7 0%, #2563eb 100%);
+}
+
+.signup {
+    text-align: center;
+    margin-top: 18px;
+    color: #888;
+    font-size: 1rem;
+}
+
+.signup a {
+    color: #2563eb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.signup a:hover {
+    text-decoration: underline;
+}
