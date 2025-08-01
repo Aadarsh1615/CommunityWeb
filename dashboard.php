@@ -240,10 +240,10 @@ if (!isset($_SESSION['user_id'])) {
             </div>
             <nav class="sidebar-nav">
                 <a href="dashboard.php" class="sidebar-link active" id="nav-dashboard"><i data-feather="grid"></i> Dashboard</a>
-                <a href="members.html" class="sidebar-link" id="nav-members"><i data-feather="users"></i> All Members</a>
-                <a href="groups.html" class="sidebar-link" id="nav-groups"><i data-feather="layers"></i> Group Info</a>
-                <a href="about.html" class="sidebar-link" id="nav-about"><i data-feather="info"></i> About Us</a>
-                <a href="contact.html" class="sidebar-link" id="nav-contact"><i data-feather="mail"></i> Contact Us</a>
+                <a href="members.php" class="sidebar-link" id="nav-members"><i data-feather="users"></i> All Members</a>
+                <a href="groups.php" class="sidebar-link" id="nav-groups"><i data-feather="layers"></i> Group Info</a>
+                <a href="about.php" class="sidebar-link" id="nav-about"><i data-feather="info"></i> About Us</a>
+                <a href="contact.php" class="sidebar-link" id="nav-contact"><i data-feather="mail"></i> Contact Us</a>
             </nav>
         </aside>
         <div style="flex:1;display:flex;flex-direction:column;">
@@ -282,7 +282,7 @@ if (!isset($_SESSION['user_id'])) {
                             <span>Total Members</span>
                             <i data-feather="users"></i>
                         </div>
-                        <div class="card-value">0</div>
+                        <div class="card-value" id="total-members">0</div>
                         <div class="card-growth up"><i data-feather="arrow-up"></i></div>
                     </div>
                     <div class="dashboard-card">
@@ -290,7 +290,7 @@ if (!isset($_SESSION['user_id'])) {
                             <span>Active Groups</span>
                             <i data-feather="layers"></i>
                         </div>
-                        <div class="card-value">0</div>
+                        <div class="card-value" id="active-groups">0</div>
                         <div class="card-growth up"><i data-feather="arrow-up"></i></div>
                     </div>
                     <div class="dashboard-card">
@@ -298,7 +298,7 @@ if (!isset($_SESSION['user_id'])) {
                             <span>Recent Activity</span>
                             <i data-feather="activity"></i>
                         </div>
-                        <div class="card-value">0</div>
+                        <div class="card-value" id="recent-activity">0</div>
                         <div class="card-growth up"><i data-feather="arrow-up"></i></div>
                     </div>
                     <div class="dashboard-card">
@@ -306,7 +306,7 @@ if (!isset($_SESSION['user_id'])) {
                             <span>Growth Rate</span>
                             <i data-feather="trending-up"></i>
                         </div>
-                        <div class="card-value"></div>
+                        <div class="card-value" id="growth-rate">0%</div>
                         <div class="card-growth up"><i data-feather="arrow-up"></i></div>
                     </div>
                 </section>
@@ -345,6 +345,58 @@ if (!isset($_SESSION['user_id'])) {
 
     <script>
         feather.replace();
+        
+        // Function to load dashboard statistics
+        async function loadDashboardStats() {
+            try {
+                const response = await fetch('dashboard_api.php');
+                const data = await response.json();
+                
+                if (data.success) {
+                    const stats = data.stats;
+                    
+                    // Update dashboard cards
+                    document.getElementById('total-members').textContent = stats.total_members;
+                    document.getElementById('active-groups').textContent = stats.active_groups;
+                    document.getElementById('recent-activity').textContent = stats.recent_activity;
+                    document.getElementById('growth-rate').textContent = stats.growth_rate + '%';
+                    
+                    // Update growth indicators
+                    const growthCards = document.querySelectorAll('.card-growth');
+                    growthCards.forEach(card => {
+                        if (stats.growth_rate > 0) {
+                            card.className = 'card-growth up';
+                            card.innerHTML = '<i data-feather="arrow-up"></i>';
+                        } else if (stats.growth_rate < 0) {
+                            card.className = 'card-growth down';
+                            card.innerHTML = '<i data-feather="arrow-down"></i>';
+                        } else {
+                            card.className = 'card-growth neutral';
+                            card.innerHTML = '<i data-feather="minus"></i>';
+                        }
+                    });
+                    
+                    // Refresh feather icons
+                    feather.replace();
+                } else {
+                    console.error('Failed to load dashboard stats:', data.error);
+                }
+            } catch (error) {
+                console.error('Error loading dashboard stats:', error);
+            }
+        }
+        
+        // Load stats on page load
+        loadDashboardStats();
+        
+        // Refresh stats every 30 seconds
+        setInterval(loadDashboardStats, 30000);
+        
+        // Listen for refresh events from other pages
+        window.addEventListener('refreshDashboardStats', function() {
+            loadDashboardStats();
+        });
+        
         // Chart tab switching (UI only)
         document.querySelectorAll('.chart-tabs button').forEach(btn => {
             btn.addEventListener('click', function() {
@@ -352,6 +404,7 @@ if (!isset($_SESSION['user_id'])) {
                 this.classList.add('active');
             });
         });
+        
         // Highlight active nav
         document.getElementById('nav-dashboard').classList.add('active');
         
